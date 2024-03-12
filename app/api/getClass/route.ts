@@ -3,7 +3,6 @@ import { google } from "googleapis";
 
 export async function GET(req: NextRequest, res: NextResponse) {
     const facultyId = req.nextUrl.searchParams.get("facultyId");
-    console.log("facultyId: " + facultyId);
 
     try {
         const auth = new google.auth.JWT(
@@ -18,7 +17,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         const sheets = google.sheets({ version: "v4", auth });
 
         const response = await sheets.spreadsheets.values.get({
-            spreadsheetId: process.env.SPREADSHEET_ID,
+            spreadsheetId: process.env.SPREADSHEET_SYLLABUS_ID,
             range: "アンケート用_授業データ",
         });
 
@@ -38,8 +37,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
             .slice(1) // ヘッダー行を除外
             .filter((row) => row[1] === facultyId)
             .map((row) => ({ value: row[0], label: row[2] }));
-
-        console.log(data);
 
         return NextResponse.json(
             { data: data },

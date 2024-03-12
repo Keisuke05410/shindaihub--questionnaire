@@ -5,10 +5,8 @@ import { useEffect, useState, Suspense } from "react";
 import Select from "react-select";
 
 export default function FacultySelector({
-    control,
     setFacultyId,
 }: {
-    control: any;
     setFacultyId: any;
 }) {
     const [facultyData, setFacultyData] = useState<any[]>([]);
@@ -38,34 +36,17 @@ export default function FacultySelector({
             {facultyData.length === 0 ? (
                 <span className="loading loading-dots loading-md"></span>
             ) : (
-                <Controller
-                    name="id"
-                    control={control}
-                    render={({ field }) => (
-                        <Select
-                            className="w-2/3 py-5 text-sm"
-                            options={
-                                facultyData as {
-                                    value: string;
-                                    label: string;
-                                }[]
-                            } // Provide the correct type for classData
-                            value={facultyData.find(
-                                (x: { value: string; label: string }) =>
-                                    x.value === field.value
-                            )}
-                            onChange={(
-                                newValue: {
-                                    value: string;
-                                    label: string;
-                                } | null
-                            ) => {
-                                if (newValue) {
-                                    setFacultyId(newValue.value);
-                                }
-                            }}
-                        />
-                    )}
+                <Select
+                    className="w-2/3 py-5 text-sm"
+                    options={
+                        facultyData as {
+                            value: string;
+                            label: string;
+                        }[]
+                    } // Provide the correct type for classData
+                    onChange={(value) => {
+                        value ? setFacultyId(value.value) : setFacultyId("");
+                    }}
                 />
             )}
         </div>
