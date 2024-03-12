@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { google } from "googleapis";
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest) {
     const facultyId = req.nextUrl.searchParams.get("facultyId");
 
     try {
@@ -25,8 +25,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
         if (!rows) {
             console.log("No data found.");
 
-            return (
-                NextResponse.json({ data: [] }),
+            return NextResponse.json(
+                { data: [] },
                 {
                     status: 200,
                 }

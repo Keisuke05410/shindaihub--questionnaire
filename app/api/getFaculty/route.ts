@@ -21,8 +21,8 @@ export async function GET() {
 
         const rows = response.data.values;
         if (!rows) {
-            return (
-                NextResponse.json({ data: [] }),
+            return NextResponse.json(
+                { data: [] },
                 {
                     status: 200,
                 }
