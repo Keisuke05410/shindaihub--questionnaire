@@ -19,9 +19,11 @@ export default function Question() {
     const [facultyId, setFacultyId] = useState<string>("");
     const [classData, setClassData] = useState<any[]>([]);
     const [apiStatus, setApiStatus] = useState<number | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
     const methods = useForm();
     const onSubmit = async (data: any) => {
         console.log(data);
+        setLoading(true);
 
         // async request which may result error
         try {
@@ -34,6 +36,7 @@ export default function Question() {
             });
 
             const result = await response.json();
+            setLoading(false);
             setApiStatus(result.status);
             window.scrollTo({ top: 0, behavior: "smooth" });
             methods.reset();
@@ -86,8 +89,9 @@ export default function Question() {
                                 <button
                                     type="submit"
                                     className="btn btn-primary"
+                                    disabled={loading}
                                 >
-                                    送信
+                                    {loading ? <>送信中...</> : <>送信</>}
                                 </button>
                             </>
                         )}
