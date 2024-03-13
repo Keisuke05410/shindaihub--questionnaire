@@ -7,8 +7,8 @@ export default function CommentInput() {
             <p className="text-sm">
                 その他、伝えたいことがあれば教えてください。
             </p>
-            <div className="py-5 flex items-center justify-center">
-                <textarea {...register("comment")} />
+            <div className="py-5 flex items-center justify-center w-2/3">
+                <textarea className="w-full p-3" {...register("comment")} />
             </div>
         </div>
     );

@@ -33,6 +33,7 @@ export default function FacultySelector({
             <p>
                 授業に対応する<b>学部・学科</b>を選んでください
             </p>
+            <p>共通科目(言語や教養)は「教養教育院」を選んでください</p>
             {facultyData.length === 0 ? (
                 <span className="loading loading-dots loading-md"></span>
             ) : (
