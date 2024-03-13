@@ -1,46 +1,47 @@
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
+import Select from "react-select";
 
 export default function ManzokudoSelector() {
-    const { register } = useFormContext();
+    const { control } = useFormContext();
+    const manzokudoOptions = [
+        { value: "5", label: "★5" },
+        {
+            value: "4",
+            label: "★4",
+        },
+        { value: "3", label: "★3" },
+        { value: "2", label: "★2" },
+        { value: "1", label: "★1" },
+    ];
 
     return (
         <div className="w-full flex flex-col justify-center items-center">
             <p className="text-sm">
-                <b>満足度</b> (内容が充実していたか)は何点ですか？
+                <b>満足度</b>(授業の充実度)を教えてください。
             </p>
-            <div className="rating py-5">
-                <input
-                    type="radio"
-                    value={1}
-                    {...register("manzokudo", { required: true })}
-                    className="mask mask-star"
-                />
-                <input
-                    type="radio"
-                    value={2}
-                    {...register("manzokudo", { required: true })}
-                    className="mask mask-star"
-                />
-                <input
-                    type="radio"
-                    value={3}
-                    {...register("manzokudo", { required: true })}
-                    className="mask mask-star"
-                    defaultChecked // デフォルトで3が選択された状態になります
-                />
-                <input
-                    type="radio"
-                    value={4}
-                    {...register("manzokudo", { required: true })}
-                    className="mask mask-star"
-                />
-                <input
-                    type="radio"
-                    value={5}
-                    {...register("manzokudo", { required: true })}
-                    className="mask mask-star"
-                />
-            </div>
+            <Controller
+                name="manzokudo"
+                control={control}
+                render={({ field, fieldState: { error } }) => (
+                    <>
+                        <Select
+                            className="w-2/3 py-5 text-sm"
+                            options={manzokudoOptions}
+                            value={
+                                manzokudoOptions.find(
+                                    (option) => option.value === field.value
+                                ) || null
+                            }
+                            onChange={(option) =>
+                                field.onChange(option?.value || "")
+                            }
+                        />
+                        {error && (
+                            <p className="text-error p-2">{error.message}</p>
+                        )}
+                    </>
+                )}
+            />
         </div>
     );
 }
