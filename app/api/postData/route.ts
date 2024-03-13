@@ -41,8 +41,8 @@ export async function POST(req: NextRequest) {
         ];
 
         const valueRange = { values: [values] };
-        const range = "テスト";
-        // const range = "評価テーブル";
+        // const range = "テスト";
+        const range = "評価テーブル";
 
         // データをスプレッドシートに追加
         const response = await sheets.spreadsheets.values.append({
