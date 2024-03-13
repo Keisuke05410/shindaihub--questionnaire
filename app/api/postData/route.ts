@@ -41,13 +41,13 @@ export async function POST(req: NextRequest) {
         ];
 
         const valueRange = { values: [values] };
-        // const range = "テスト";
-        const range = "評価テーブル";
+        const range = "口コミ_テスト";
 
         // データをスプレッドシートに追加
         const response = await sheets.spreadsheets.values.append({
             range,
-            spreadsheetId: process.env.SPREADSHEET_EVALUATION_ID,
+            spreadsheetId: (process.env.SPREADSHEET_SYLLABUS_ID =
+                "1d8x4rcJUN-vJWZZeHI1qVdXB6jTfdSN2aVAgVahBq2E"),
             valueInputOption: "USER_ENTERED",
             requestBody: valueRange,
         });
