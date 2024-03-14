@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.2.2",
     "fast-csv": "^5.0.1",
     "fs": "^0.0.1-security",
     "google-auth-library": "^9.6.3",
