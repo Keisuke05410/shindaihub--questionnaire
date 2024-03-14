@@ -39,6 +39,7 @@ export default function FacultySelector({
             ) : (
                 <Select
                     className="w-2/3 py-5 text-sm"
+                    placeholder="入力してください。"
                     options={
                         facultyData as {
                             value: string;
