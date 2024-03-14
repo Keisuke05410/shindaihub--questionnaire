@@ -71,6 +71,7 @@ export default function ClassSelector({ facultyId }: { facultyId: string }) {
                         <>
                             <Select
                                 className="w-2/3 py-5 text-sm"
+                                placeholder="入力してください。"
                                 options={classData}
                                 value={
                                     classData.find(
