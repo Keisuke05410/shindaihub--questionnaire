@@ -19,6 +19,7 @@ export default function RakutandoSelector() {
             <Controller
                 name="rakutando"
                 control={control}
+                rules={{ required: "楽単度を選択してください" }}
                 render={({ field, fieldState: { error } }) => (
                     <>
                         <Select
