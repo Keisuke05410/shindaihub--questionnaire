@@ -22,6 +22,7 @@ export default function ManzokudoSelector() {
             <Controller
                 name="manzokudo"
                 control={control}
+                rules={{ required: "満足度を選択してください" }}
                 render={({ field, fieldState: { error } }) => (
                     <>
                         <Select

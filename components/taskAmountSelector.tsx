@@ -18,6 +18,7 @@ export default function TaskAmountSelector() {
             <Controller
                 name="taskAmount"
                 control={control}
+                rules={{ required: "課題の量を選択してください" }}
                 render={({ field, fieldState: { error } }) => (
                     <>
                         <Select
