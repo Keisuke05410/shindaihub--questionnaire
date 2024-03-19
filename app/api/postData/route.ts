@@ -7,7 +7,9 @@ export async function POST(req: NextRequest) {
         const data = await req.json();
 
         // データに現在の日時とユーザーIDを追加
-        data["timestamp"] = new Date().toLocaleString();
+        data["timestamp"] = new Date().toLocaleString("ja-JP", {
+            timeZone: "Asia/Tokyo",
+        });
         data["userId"] = "0"; // ログインなどの実装するときには、ここで実際のユーザーIDを設定する
         data["evalutationId"] = crypto.randomUUID();
 
@@ -41,13 +43,12 @@ export async function POST(req: NextRequest) {
         ];
 
         const valueRange = { values: [values] };
-        const range = "口コミ_本番";
+        const range = "口コミ_テスト";
 
         // データをスプレッドシートに追加
         const response = await sheets.spreadsheets.values.append({
             range,
-            spreadsheetId: (process.env.SPREADSHEET_SYLLABUS_ID =
-                "1d8x4rcJUN-vJWZZeHI1qVdXB6jTfdSN2aVAgVahBq2E"),
+            spreadsheetId: process.env.SPREADSHEET_SYLLABUS_ID,
             valueInputOption: "USER_ENTERED",
             requestBody: valueRange,
         });
