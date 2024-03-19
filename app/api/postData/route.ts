@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { headers } from "next/headers";
 import { google } from "googleapis";
 import crypto from "crypto";
 
@@ -7,11 +6,10 @@ export async function POST(req: NextRequest) {
     try {
         const data = await req.json();
 
-        const headersList = headers();
-        const ip = headersList.get("x-forwarded-for");
-
         // データに現在の日時とユーザーIDを追加
-        data["timestamp"] = new Date().toLocaleString();
+        data["timestamp"] = new Date().toLocaleString("ja-JP", {
+            timeZone: "Asia/Tokyo",
+        });
         data["userId"] = "0"; // ログインなどの実装するときには、ここで実際のユーザーIDを設定する
         data["evalutationId"] = crypto.randomUUID();
 
@@ -42,7 +40,6 @@ export async function POST(req: NextRequest) {
             data.testDifficulty,
             data.attendance,
             data.comment,
-            ip,
         ];
 
         const valueRange = { values: [values] };
@@ -51,8 +48,7 @@ export async function POST(req: NextRequest) {
         // データをスプレッドシートに追加
         const response = await sheets.spreadsheets.values.append({
             range,
-            spreadsheetId: (process.env.SPREADSHEET_SYLLABUS_ID =
-                "1d8x4rcJUN-vJWZZeHI1qVdXB6jTfdSN2aVAgVahBq2E"),
+            spreadsheetId: process.env.SPREADSHEET_SYLLABUS_ID,
             valueInputOption: "USER_ENTERED",
             requestBody: valueRange,
         });
