@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
 import { google } from "googleapis";
 import crypto from "crypto";
 
 export async function POST(req: NextRequest) {
     try {
         const data = await req.json();
+
+        const headersList = headers();
+        const ip = headersList.get("x-forwarded-for");
 
         // データに現在の日時とユーザーIDを追加
         data["timestamp"] = new Date().toLocaleString();
@@ -38,10 +42,11 @@ export async function POST(req: NextRequest) {
             data.testDifficulty,
             data.attendance,
             data.comment,
+            ip,
         ];
 
         const valueRange = { values: [values] };
-        const range = "口コミ_本番";
+        const range = "口コミ_テスト";
 
         // データをスプレッドシートに追加
         const response = await sheets.spreadsheets.values.append({
