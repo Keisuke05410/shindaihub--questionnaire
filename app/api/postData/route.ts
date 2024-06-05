@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
         ];
 
         const valueRange = { values: [values] };
-        const range = "口コミ_テスト";
+        const range = "口コミ_本番";
 
         // データをスプレッドシートに追加
         const response = await sheets.spreadsheets.values.append({
