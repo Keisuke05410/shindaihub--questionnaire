@@ -6,6 +6,10 @@ export default function YearSelector() {
 
     const yearOptions = [
         {
+            value: "2024",
+            label: "2024年度",
+        },
+        {
             value: "2023",
             label: "2023年度",
         },
